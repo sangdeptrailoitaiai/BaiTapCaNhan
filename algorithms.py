@@ -475,6 +475,64 @@ def ida_star(initial, goal, max_depth=100):
     
     return None, 0
 
+def random_hill_climbing(initial, goal, max_iterations=1000):
+    current = initial[:]
+    path = [current[:]]
+    current_cost = manhattan(current, goal)
+    
+    for _ in range(max_iterations):
+        # Lấy ngẫu nhiên một hành động
+        action = random.choice(ACTIONS)
+        next_state = move(current, action)
+        
+        if next_state:
+            next_cost = manhattan(next_state, goal)
+            
+            # Nếu trạng thái mới tốt hơn hoặc bằng trạng thái hiện tại
+            if next_cost <= current_cost:
+                current = next_state
+                path.append(current[:])
+                current_cost = next_cost
+                
+                # Nếu đạt được mục tiêu
+                if current == goal:
+                    return path, len(path) - 1
+    
+    return path, len(path) - 1
+
+def min_conflicts(initial, goal, max_steps=1000):
+    current = initial[:]
+    path = [current[:]]
+    
+    for _ in range(max_steps):
+        if current == goal:
+            return path, len(path) - 1
+            
+        # Tìm vị trí của ô trống
+        empty_pos = current.index(0)
+        
+        # Tính số xung đột cho mỗi hành động có thể
+        conflicts = {}
+        for action in ACTIONS:
+            next_state = move(current, action)
+            if next_state:
+                # Số xung đột là số ô không đúng vị trí
+                conflicts[action] = sum(1 for i in range(9) if next_state[i] != goal[i])
+        
+        if conflicts:
+            # Chọn hành động có ít xung đột nhất
+            min_conflict = min(conflicts.values())
+            best_actions = [a for a, c in conflicts.items() if c == min_conflict]
+            action = random.choice(best_actions)
+            
+            # Thực hiện hành động
+            next_state = move(current, action)
+            if next_state:
+                current = next_state
+                path.append(current[:])
+    
+    return path, len(path) - 1
+
 def solve_with_algorithm(initial, goal, name):
     start_time = time.time()
     name = name.lower()
@@ -499,6 +557,8 @@ def solve_with_algorithm(initial, goal, name):
     elif name == "qlearning" or name == "q-learning": result = q_learning(initial, goal)
     elif name == "ids": result = ids(initial, goal)
     elif name == "ida_star": result = ida_star(initial, goal)
+    elif name == "random_hc": result = random_hill_climbing(initial, goal)
+    elif name == "min_conflicts": result = min_conflicts(initial, goal)
     else: result = None, 0
     end_time = time.time()
     execution_time = end_time - start_time
