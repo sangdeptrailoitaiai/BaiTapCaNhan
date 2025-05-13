@@ -23,6 +23,9 @@ Tại mỗi bước, ô trống có thể di chuyển lên, xuống, sang trái 
 Mỗi hành động được tính một chi phí bằng 1, với mục tiêu tìm con đường ngắn nhất từ trạng thái đầu đến trạng thái cuối.
 +	Chiến lược giải quyết
 Chuỗi các trạng thái tạo thành lời giải được xây dựng thông qua việc áp dụng các thuật toán tìm kiếm không sử dụng thông tin hướng dẫn: BFS, DFS, UCS và IDS.
+![2 1](https://github.com/user-attachments/assets/a31309ec-b9f4-4cee-a5d9-256778be0448)
+
+
 ________________________________________
 Đánh giá các thuật toán
 +	BFS (Tìm kiếm theo chiều rộng):
@@ -59,6 +62,8 @@ Cấu trúc bài toán và hướng tiếp cận
   +Chiến lược giải quyết
   Dựa trên các thuật toán có sử dụng thông tin định hướng (heuristic), bao gồm: Greedy Best-First Search (GBFS), A* và Iterative Deepening A* (IDA*).
   
+  ![2 2](https://github.com/user-attachments/assets/e879afdd-635a-4f66-9894-3b9777d23438)
+
 Phân tích thuật toán
   +GBFS (Tìm kiếm tham lam theo giá trị heuristic):
   Tập trung tìm kiếm dựa trên giá trị heuristic hiện tại, bỏ qua chi phí tích lũy. Nhờ đó, GBFS hoạt động rất nhanh và duyệt ít trạng thái. Tuy nhiên, nó dễ bị kẹt ở điểm tối ưu cục bộ nếu hàm heuristic không chính xác, dẫn đến không đảm bảo tìm được đường đi tốt nhất.
@@ -91,7 +96,9 @@ Mỗi thao tác di chuyển được tính là 1 đơn vị chi phí. Do đó, l
 +	Cách tiếp cận giải bài toán
 Các thuật toán trong nhóm này sử dụng chiến lược tối ưu cục bộ để dần tiến tới trạng thái mục tiêu, bao gồm:
 Simple Hill Climbing (SHC), Steepest Ascent Hill Climbing (SAHC), Simulated Annealing (SA), Beam Search (BS) và Genetic Algorithm (GA).
-________________________________________
+
+__________________________________![2 3](https://github.com/user-attachments/assets/c43396af-1e92-45a0-99e0-cf2667771d20)
+______
 Đánh giá các thuật toán
 +	SHC (Leo đồi đơn giản):
 Ưu tiên trạng thái lân cận đầu tiên tốt hơn trạng thái hiện tại và dừng ngay khi không còn cải thiện. Do không kiểm tra toàn bộ lân cận và không có cơ chế thoát cực trị, SHC chạy nhanh nhưng dễ bị mắc kẹt.
@@ -103,6 +110,7 @@ Thay vì chọn ngẫu nhiên, SAHC duyệt toàn bộ trạng thái lân cận 
 Giới hạn số lượng trạng thái được mở rộng tại mỗi bước (ví dụ: 5 trạng thái tốt nhất), giúp tăng tốc tìm kiếm. Tuy nhiên, nếu chọn beam width quá nhỏ, BS có thể bỏ lỡ lời giải tốt.
 +	GA (Thuật toán di truyền):
 Lấy cảm hứng từ tiến hóa sinh học, GA hoạt động dựa trên các quần thể trạng thái, chọn lọc và tái tổ hợp để tìm lời giải. Tuy hoạt động tốt trong việc bao phủ không gian rộng, nhưng tốc độ chậm và tiêu tốn nhiều tài nguyên.
++ Random Hill Climbing (RHC): Thời gian chạy trung bình trong nhóm Hill Climbing, vì chỉ chọn ngẫu nhiên một trạng thái lân cận tốt hơn thay vì duyệt hết như SAHC.
 ________________________________________
 Kết luận
 +	GA phù hợp với các bài toán cần khai phá toàn diện không gian tìm kiếm và tìm lời giải tối ưu, dù chi phí về thời gian và bộ nhớ cao.
@@ -127,6 +135,8 @@ Tại mỗi bước, ô trống có thể di chuyển theo bốn hướng. Tuy n
 Mỗi bước dịch chuyển được tính chi phí là 1. Mục tiêu của các thuật toán vẫn là tìm đường đi ngắn nhất đến đích, dù trong điều kiện thông tin không đầy đủ.
 +	Chiến lược giải quyết
 Các thuật toán như AND-OR Search, Belief State Search, và Partial Observable Search (POS) được sử dụng để xử lý các tình huống phức tạp này. Tất cả đều dựa vào việc duy trì và xử lý các tập belief states nhằm tìm ra chuỗi hành động dẫn đến mục tiêu cho toàn bộ các trạng thái có thể xảy ra.
+![2 4](https://github.com/user-attachments/assets/1d788062-487f-4adf-b64d-1759759045cd)
+
 ________________________________________
 Phân tích thuật toán
 +	AND-OR Search
@@ -162,11 +172,14 @@ Hệ thống gán từng giá trị vào ô, sử dụng:
 Bài toán này không đặt nặng tối ưu hóa số bước mà chủ yếu tập trung vào việc tìm ra một cấu hình hợp lệ duy nhất thỏa tất cả điều kiện đặt ra.
 +	Giải pháp đầu ra
 Là một chuỗi các bước gán giá trị hợp lệ từ trạng thái rỗng cho đến khi đạt được trạng thái mục tiêu. Các thuật toán như Backtracking và Forward Checking đảm bảo việc tìm kiếm dừng lại khi tất cả ràng buộc đều được thỏa mãn.
-________________________________________
+
+______![2 5](https://github.com/user-attachments/assets/fa7126bd-a803-4f88-b59b-67e6555d97f0)
+__________________________________
 Đánh giá thuật toán
 +	Backtracking Search
 Tìm kiếm theo chiều sâu, kiểm tra từng bước và quay lui khi có xung đột. Mặc dù đơn giản và dễ cài đặt, nhưng thuật toán này có thể duyệt rất nhiều trạng thái không cần thiết khi không gian tìm kiếm lớn.
 +	Forward Checking Search
++	Min-Conflicts Search: Thuật toán bắt đầu từ trạng thái rỗng, gán giá trị và điều chỉnh để giảm xung đột, sử dụng Simulated Annealing để tránh cực trị địa phương. Số trạng thái khám phá thấp nhất nhờ chiến lược sửa lỗi từng bước, nhưng chi phí mỗi bước cao do tính toán xung đột.
 Tối ưu hơn Backtracking bằng cách loại bỏ sớm các khả năng không hợp lệ nhờ kỹ thuật kiểm tra forward. Kết hợp với các chiến lược như:
   +	MRV (Minimum Remaining Values): chọn ô có ít giá trị hợp lệ nhất để gán trước.
  +	LCV (Least Constraining Value): ưu tiên gán giá trị ít ảnh hưởng đến ô khác nhất.
@@ -176,6 +189,7 @@ ________________________________________
 Kết luận
 +	Backtracking phù hợp cho những bài toán nhỏ hoặc khi cấu trúc ràng buộc đơn giản. Tuy nhiên, khi không gian tìm kiếm mở rộng, nó dễ bị chậm do số trạng thái cần duyệt quá lớn.
 +	Forward Checking giúp giảm đáng kể số lượng trạng thái duyệt nhưng đòi hỏi nhiều tính toán hơn tại mỗi bước gán. Đây là lựa chọn hiệu quả khi cần giảm thiểu không gian tìm kiếm, đặc biệt trong các bài toán có nhiều ràng buộc chặt chẽ.
++	Min-Conflicts Search là lựa chọn tốt nhất trong nhóm về không gian trạng thái, với thời gian chạy hợp lý. Nó hiệu quả khi trạng thái ban đầu gần mục tiêu, nhờ khả năng sửa lỗi từng bước.
 2.6 Các thành phần cốt lõi trong bài toán và cách tiếp cận giải bằng Q-Learning
 +	Trạng thái khởi đầu:
 Bài toán bắt đầu với một bảng 3x3 chứa các số từ 1 đến 8 và một ô trống (0), ví dụ: [[4, 1, 3], [7, 2, 6], [0, 5, 8]]. Đây là trạng thái xuất phát của agent trong quá trình học.
@@ -187,6 +201,8 @@ Bao gồm tất cả các hoán vị hợp lệ của lưới 3x3, được sinh
 Tại mỗi trạng thái, agent có thể thực hiện một trong các hành động: lên, xuống, trái, hoặc phải, nếu di chuyển đó hợp lệ (không vượt ra ngoài lưới).
 +	Định nghĩa chi phí / phần thưởng:
 Trong Q-Learning, khái niệm chi phí được thay thế bằng phần thưởng (reward). Mỗi bước di chuyển được gán một phần thưởng âm nhẹ để khuyến khích tìm đường đi ngắn nhất. Khi agent đạt được trạng thái mục tiêu, nó nhận một phần thưởng dương lớn.
+![2 6](https://github.com/user-attachments/assets/1489d316-b176-48ef-9737-a2d46d22b13a)
+
 +	Chiến lược giải:
 Q-Learning sử dụng một bảng Q (Q-table) để học giá trị kỳ vọng của mỗi hành động tại mỗi trạng thái, thông qua quá trình thử-sai (exploration) và khai thác (exploitation). Khi đã học xong, agent có thể trích xuất dãy hành động tốt nhất dẫn đến mục tiêu từ bảng Q này.
 
